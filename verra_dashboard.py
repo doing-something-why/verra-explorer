@@ -210,7 +210,7 @@ st.session_state['selected_year'] = selected_year
 
 # Threshold slider
 credit_threshold = st.sidebar.slider("Minimum Credits Threshold", 
-                                  min_value=1000, 
+                                  min_value=0, 
                                   max_value=50000, 
                                   value=5000, 
                                   step=1000,
