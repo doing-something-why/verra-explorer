@@ -318,16 +318,7 @@ try:
             # Display summary table
             st.dataframe(registry_summary, use_container_width=True)
             
-            # Create comparison pie chart
-            fig_registry = px.pie(
-                registry_summary,
-                values='Total Credits',
-                names='Registry',
-                title='Credit Volume by Registry',
-                color='Registry',
-                color_discrete_map={'Verra': '#1f77b4', 'Gold Standard': '#ff7f0e'}
-            )
-            st.plotly_chart(fig_registry, use_container_width=True)
+            
     else:
         st.info(f"No companies found in {selected_year} with more than {credit_threshold:,} credits. Try selecting a different year or lowering the threshold.")
         
@@ -384,18 +375,6 @@ try:
         registry_dist = company_data.groupby('registry').agg({
             'credit_quantity': 'sum'
         }).reset_index()
-        
-        if len(registry_dist) > 1:  # Only show if multiple registries
-            st.subheader("Registry Distribution")
-            fig_reg = px.pie(
-                registry_dist,
-                values='credit_quantity',
-                names='registry',
-                title=f'Credits by Registry for {selected_display}',
-                color='registry',
-                color_discrete_map={'Verra': '#1f77b4', 'Gold Standard': '#ff7f0e'}
-            )
-            st.plotly_chart(fig_reg, use_container_width=True)
         
         # Year-over-year analysis
         if not yearly_stats.empty:
